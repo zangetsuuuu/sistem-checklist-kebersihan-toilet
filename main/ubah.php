@@ -1,3 +1,67 @@
+<?php
+include "config/koneksi.php";
+include "login.php";
+include "login_session.php";
+
+if (isset($_POST['ubah_checklist'])) {
+    
+    if (isset($_GET['id'])) {
+        $tanggal = $_POST['tanggal'];
+        $users_id = $_POST['users_id'];
+        $toilet_id = $_POST['toilet_id'];
+        $kloset = $_POST['kloset'];
+        $wastafel = $_POST['wastafel'];
+        $lantai = $_POST['lantai'];
+        $dinding = $_POST['dinding'];
+        $kaca = $_POST['kaca'];
+        $bau = $_POST['bau'];
+        $sabun = $_POST['sabun'];
+    
+        $query = "UPDATE checklist SET tanggal = '$tanggal', users_id = '$users_id', toilet_id = '$toilet_id', kloset = '$kloset', wastafel = '$wastafel', lantai = '$lantai', dinding = '$dinding', kaca = '$kaca', bau = '$bau', sabun = '$sabun' WHERE id = '$_GET[id]'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            echo "<script>window.location.href='home.php';</script>";
+        } else {
+            echo "<script>alert('Data gagal diubah!');</script>";
+            echo "<script>window.location.href='home.php';</script>";
+        }
+    }
+}
+
+$users_id = "";
+$toilet_id = "";
+$kloset = "";
+$wastafel = "";
+$lantai = "";
+$dinding = "";
+$kaca = "";
+$bau = "";
+$sabun = "";
+$tanggal = "";
+
+if (isset($_GET['id'])) {
+
+    $result = mysqli_query($conn, "SELECT * FROM checklist WHERE id = '$_GET[id]'");
+    $row = mysqli_fetch_array($result);
+        
+    if ($row) {
+        $users_id = $row['users_id'];
+        $toilet_id = $row['toilet_id'];
+        $kloset = $row['kloset'];
+        $wastafel = $row['wastafel'];
+        $lantai = $row['lantai'];
+        $dinding = $row['dinding'];
+        $kaca = $row['kaca'];
+        $bau = $row['bau'];
+        $sabun = $row['sabun'];
+        $tanggal = date('Y-m-d', strtotime($row['tanggal'])); 
+    } 
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
