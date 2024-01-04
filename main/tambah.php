@@ -1,3 +1,68 @@
+<?php
+include "config/koneksi.php";
+
+if (isset($_POST['tambah_checklist'])) {
+    date_default_timezone_set('Asia/Jakarta');
+
+    $toilet_id = $_POST['toilet_id'];
+    $kloset = $_POST['kloset'];
+    $wastafel = $_POST['wastafel'];
+    $lantai = $_POST['lantai'];
+    $dinding = $_POST['dinding'];
+    $kaca = $_POST['kaca'];
+    $bau = $_POST['bau'];
+    $sabun = $_POST['sabun'];
+    $users_id = $_POST['users_id'];
+
+    $query = "INSERT INTO checklist (tanggal, toilet_id, kloset, wastafel, lantai, dinding, kaca, bau,
+    sabun, users_id) VALUES (NOW(), '$toilet_id', '$kloset', '$wastafel', '$lantai', '$dinding', '$kaca', '$bau', '$sabun', '$users_id')";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        echo "<script>window.location='home.php'</script>";
+    } else {
+        die("Maaf, data gagal disimpan: " . mysqli_error($conn));
+    }
+}
+
+elseif (isset($_POST['tambah_akun'])) {
+    $username = $_POST['username'];
+    $pass = $_POST['password'];
+    $nama = $_POST['nama'];
+    $email = $_POST['email'];
+    $status = $_POST['status'];
+    $role = $_POST['role'];
+
+    $query = "INSERT INTO users (username, pass, nama, email, status, role)
+              VALUES ('$username', '$pass', '$nama', '$email', '$status', '$role')";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        echo "<script>window.location='index.php'</script>";
+    } else {
+        die("Maaf data gagal disimpan: " . mysqli_error($conn));
+    }
+}
+
+elseif (isset($_POST['tambah_toilet'])) {
+    $toilet_id = $_POST['toilet_id'];
+    $lokasi = $_POST['lokasi'];
+    $keterangan = $_POST['keterangan'];
+
+    $query = "INSERT INTO toilet (id, lokasi, keterangan)
+              VALUES ('$toilet_id', '$lokasi', '$keterangan')";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        echo "<script>window.location='data_toilet.php'</script>";
+    } else {
+        die("Maaf data gagal disimpan: " . mysqli_error($conn));
+    }
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
