@@ -1,3 +1,46 @@
+<?php
+include "config/koneksi.php";
+include "login.php";
+include "login_session.php";
+
+if (isset($_POST['ubah_toilet'])) {
+    
+    if (isset($_GET['id'])) {
+        $toilet_id = $_POST['toilet_id'];
+        $lokasi = $_POST['lokasi'];
+        $keterangan = $_POST['keterangan'];
+    
+        $query = "UPDATE toilet SET id = '$toilet_id', lokasi = '$lokasi', keterangan = '$keterangan'  WHERE id = '$_GET[id]'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            echo "<script>window.location.href='data_toilet.php';</script>";
+        } else {
+            echo "<script>alert('Data gagal diubah!');</script>";
+            echo "<script>window.location.href='data_toilet.php';</script>";
+        }
+    }
+}
+
+$toilet_id = "";
+$lokasi = "";
+$keterangan = "";
+
+if (isset($_GET['id'])) {
+
+    $result = mysqli_query($conn, "SELECT * FROM toilet WHERE id = '$_GET[id]'");
+    $row = mysqli_fetch_array($result);
+        
+    if ($row) {
+        $toilet_id = $row['id'];
+        $lokasi = $row['lokasi'];
+        $keterangan = $row['keterangan'];
+    } 
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
