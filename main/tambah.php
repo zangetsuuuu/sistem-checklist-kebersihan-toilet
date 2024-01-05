@@ -24,7 +24,6 @@ if (isset($_POST['tambah_checklist'])) {
         die("Maaf, data gagal disimpan: " . mysqli_error($conn));
     }
 }
-
 elseif (isset($_POST['tambah_akun'])) {
     $username = $_POST['username'];
     $pass = $_POST['password'];
