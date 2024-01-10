@@ -47,7 +47,7 @@
 
 - #### Program
 
-  > <a href="toiletkita.my.id" target="_blank"><img src="./main/assets/images/internet.svg" width="32" height="32" alt="Internet Icon"></a>
+  > <a href="https://toiletkita.my.id" target="_blank"><img src="./main/assets/images/internet.svg" width="32" height="32" alt="Internet Icon"></a>
 
 ---
 
